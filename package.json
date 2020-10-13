@@ -1,0 +1,30 @@
+{
+  "name": "@unegma/utilities",
+  "version": "1.0.0",
+  "description": "Various Useful Utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unegma/utilities.git"
+  },
+  "keywords": [
+    "utilities"
+  ],
+  "author": "Unegma lTD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unegma/utilities/issues"
+  },
+  "homepage": "https://github.com/unegma/utilities#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
+    "sinon": "^9.0.3",
+    "sinon-chai": "^3.5.0"
+  },
+  "dependencies": {
+  }
+}
