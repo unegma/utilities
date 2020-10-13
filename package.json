@@ -25,6 +25,5 @@
     "sinon": "^9.0.3",
     "sinon-chai": "^3.5.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
