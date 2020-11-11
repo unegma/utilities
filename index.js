@@ -35,11 +35,14 @@ module.exports.getAttValue = function (searchData, keysValue, useKey = 'machine_
     let attribute;
     if(Array.isArray(keysValue)) {
       // this section could probably be improved
-      attribute = keysValue.map(kV => {
+      let attributes = keysValue.map(kV => {
         let d = searchData.find(xA => xA[useKey] === kV);
         return d;
       }).filter(e => e); // remove undefineds
-      attribute = attribute[0];
+      // if found multiple objects, only return ones where the returnKey (ie value) is not null or undefined
+      attribute = attributes.find(at => {
+        return (at[returnKey] !== null && at[returnKey] !== undefined);
+      });
     } else {
       attribute = searchData.find(xA => xA[useKey] === keysValue);
     }

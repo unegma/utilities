@@ -38,7 +38,17 @@ describe('Utilities Test', () => {
         "machine_name": "address",
         "value": "1 the street",
         "type": "text"
-      }
+      },
+      {
+        "id": 2222,
+        "idHash": "2222",
+        "value": null,
+      },
+      {
+        "id": 3333,
+        "idHash": "2222",
+        "value": "here",
+      },
     ];
 
     const data2 = {
@@ -120,6 +130,9 @@ describe('Utilities Test', () => {
 
     // let result4f = utilities.getAttValue(data2, ["123456", "34"], 'idHash');
     // expect(result4f).to.equal("1 the street");
+
+    let result5a = utilities.getAttValue(data, [2222, 3333], "id");
+    expect(result5a).to.equal("here");
   });
 
 });
