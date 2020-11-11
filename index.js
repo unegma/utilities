@@ -23,7 +23,7 @@ module.exports.addDelayToPromises = function (promises, delayIncrement = 1000) {
  * searchData can either be an array of objects or an object.
  *
  * @param searchData
- * @param keysValue Key's Value
+ * @param keysValue Key's Value (can also be an array Array|value), if array, will only return 1 value
  * @param useKey
  * @param returnKey
  * @param returnEmptyValue
@@ -32,10 +32,21 @@ module.exports.addDelayToPromises = function (promises, delayIncrement = 1000) {
 module.exports.getAttValue = function (searchData, keysValue, useKey = 'machine_name',
                                        returnKey = 'value', returnEmptyValue = undefined) {
   if (Array.isArray(searchData)) {
-    const attribute = searchData.find(xA => xA[useKey] === keysValue);
+    let attribute;
+    if(Array.isArray(keysValue)) {
+      // this section could probably be improved
+      attribute = keysValue.map(kV => {
+        let d = searchData.find(xA => xA[useKey] === kV);
+        return d;
+      }).filter(e => e); // remove undefineds
+      attribute = attribute[0];
+    } else {
+      attribute = searchData.find(xA => xA[useKey] === keysValue);
+    }
     // returning undefined will allow default parameters to be used when calling functions myVariable = ""
     return attribute !== undefined ? attribute[returnKey] : returnEmptyValue;
   } else {
+    // could add in a section for checking an array of inputs for individual objects (see above)
     if (searchData[useKey] === keysValue) {
       return searchData[returnKey];
     } else {
