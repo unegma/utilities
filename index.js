@@ -23,21 +23,23 @@ module.exports.addDelayToPromises = function (promises, delayIncrement = 1000) {
  * searchData can either be an array of objects or an object.
  *
  * @param searchData
- * @param key
+ * @param keysValue Key's Value
  * @param useKey
- * @param returnType
+ * @param returnKey
+ * @param returnEmptyValue
  * @returns {*|undefined}
  */
-module.exports.getAttValue = function (searchData, key, useKey = 'machine_name', returnType = undefined) {
+module.exports.getAttValue = function (searchData, keysValue, useKey = 'machine_name',
+                                       returnKey = 'value', returnEmptyValue = undefined) {
   if (Array.isArray(searchData)) {
-    const attribute = searchData.find(xA => xA[useKey] === key);
+    const attribute = searchData.find(xA => xA[useKey] === keysValue);
     // returning undefined will allow default parameters to be used when calling functions myVariable = ""
-    return attribute !== undefined ? attribute.value : returnType;
+    return attribute !== undefined ? attribute[returnKey] : returnEmptyValue;
   } else {
-    if (searchData[useKey] === key) {
-      return searchData.value;
+    if (searchData[useKey] === keysValue) {
+      return searchData[returnKey];
     } else {
-      return returnType;
+      return returnEmptyValue;
     }
   }
 }
