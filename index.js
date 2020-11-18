@@ -22,6 +22,8 @@ module.exports.addDelayToPromises = function (promises, delayIncrement = 1000) {
  * Return a value from an array of objects, otherwise return undefined (or empty string)
  * searchData can either be an array of objects or an object.
  *
+ * Returning undefined is also needed, because otherwise, sending null as a value to some api endpoints (tc) can cause problems 'can't be null'
+ *
  * @param searchData
  * @param keysValue Key's Value (can also be an array Array|value), if array, will only return 1 value
  * @param useKey
