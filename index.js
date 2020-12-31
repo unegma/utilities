@@ -59,3 +59,26 @@ module.exports.getAttValue = function (searchData, keysValue, useKey = 'machine_
     }
   }
 }
+
+/**
+ * Check if data in (for example) DynamoDB or Google Sheet, is the same as in Another array of data
+ * Can be used to check if records exist in one database as well as another, especially where the ID fields
+ * are different. Especially useful for DynamoDB
+ *
+ * Can use like so: let missingRecordsByID = checkForMissingData(theirData, ourData, 'id', 'ID');
+ *
+ * @param theirData
+ * @param ourData
+ * @param theirKey
+ * @param ourKey
+ * @returns {*[]}
+ */
+module.exports.checkForMissingData = function (theirData, ourData, theirKey, ourKey) {
+  if (typeof ourData === "undefined") return theirData.flatMap(tcD => tcD[theirKey]); // e.g. return all ids if none in database
+  return theirData.flatMap(tcD => {
+    let exists = ourData.some(dbD => tcD[theirKey] == dbD[ourKey]); // could be string or number
+    if (!exists) {
+      return tcD[theirKey];
+    }
+  }).filter(e => e); // remove any undefined
+}
