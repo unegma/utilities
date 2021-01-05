@@ -5,16 +5,28 @@
  * @param delayIncrement
  * @returns {Promise<*>}
  */
-module.exports.addDelayToPromises = function (promises, delayIncrement = 1000) {
+module.exports.addDelayToPromises = function (promises, delayIncrement = 300) {
   console.log(`Beginning addDelayToPromises with delay: ${delayIncrement} and promises: ${promises.length}`);
   let delay = 0;
   const newPromises = promises.map(promise => {
     delay += delayIncrement;
-    return new Promise(resolve => setTimeout(resolve, delay)).then(() => promise);
+    return new Promise(resolve => setTimeout(resolve, delay)).then(async () => {
+      return await promise;
+    });
   })
   console.log(`Finishing addDelayToPromises`);
   return newPromises;
 }
+
+// let delay = 0; let delayIncrement2 = 100;
+// let promises = items.map(i => {
+//   delay += delayIncrement2;
+//   return new Promise(resolve => setTimeout(resolve, delay)).then(async () => {
+//     return await dbLib.addItem(i.id, i);
+//   })
+// });
+// let result = await Promise.all(promises);
+
 
 /**
  * Return Attribute Value
