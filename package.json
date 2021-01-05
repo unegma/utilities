@@ -1,6 +1,6 @@
 {
   "name": "@unegma/utilities",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Various Useful Utilities",
   "main": "index.js",
   "scripts": {
